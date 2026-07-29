@@ -16,14 +16,15 @@ async function getFeatured(): Promise<Dress[]> {
   return data;
 }
 async function getTotals() {
-  const { data, count } = await supabaseServer
-    .from("dresses")
-    .select("votes", { count: "exact" });
+ const { data, count } = await supabaseServer
+  .from("dresses")
+  .select("votes", { count: "exact" })
+  .returns<{ votes: number | null }[]>();
 
-  const totalVotes = (data ?? []).reduce(
-    (sum, d: { votes: number | null }) => sum + (d.votes ?? 0),
-    0
-  );
+const totalVotes = (data ?? []).reduce(
+  (sum, d) => sum + (d.votes ?? 0),
+  0
+);
 
   return { totalVotes, totalDresses: count ?? 0 };
 }
