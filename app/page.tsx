@@ -6,23 +6,16 @@ import type { Dress } from "@/lib/types";
 
 export const revalidate = 30;
 
-async function getFeatured(): Promise<Dress[]> {
-  const { data, error } = await supabaseServer
-    .from("dresses")
-    .select("*")
-    .order("votes", { ascending: false })
-    .limit(3);
-
-  if (error || !data) return [];
-  return data;
-}
-
 async function getTotals() {
   const { data, count } = await supabaseServer
     .from("dresses")
     .select("votes", { count: "exact" });
 
-  const totalVotes = (data ?? []).reduce((sum, d) => sum + (d.votes ?? 0), 0);
+  const totalVotes = (data ?? []).reduce(
+    (sum, d: { votes: number | null }) => sum + (d.votes ?? 0),
+    0
+  );
+
   return { totalVotes, totalDresses: count ?? 0 };
 }
 
