@@ -33,13 +33,13 @@ export default function VoteButton({
 
     startTransition(async () => {
       const fingerprint = getVoterFingerprint();
-      const { data, error: rpcError } = await supabase.rpc(
+     const { data, error: rpcError } = await supabase.rpc(
   "cast_vote",
   {
     p_dress_id: dressId,
     p_voter_fingerprint: fingerprint,
   } as any
-);
+) as { data: { new_votes: number }[] | null; error: any };
       if (rpcError) {
         // Roll back optimistic state on failure
         setVotes((v) => Math.max(v - 1, 0));
