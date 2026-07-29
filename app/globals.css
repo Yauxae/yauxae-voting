@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-fraunces: "Fraunces", serif;
+  --font-manrope: "Manrope", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #210509;
+  color: #f3e9dc;
+  font-family: var(--font-manrope), sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Matte film-grain texture layered over the burgundy background */
+.grain-overlay {
+  position: relative;
+}
+.grain-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/></svg>");
+}
+
+/* Leopard print pattern — used sparingly as an accent, never as a full background */
+.leopard-pattern {
+  background-color: #c9a46e;
+  background-image:
+    radial-gradient(ellipse 6px 5px at 10px 12px, #2a170f 40%, transparent 42%),
+    radial-gradient(ellipse 5px 4px at 24px 6px, #2a170f 40%, transparent 42%),
+    radial-gradient(ellipse 7px 5px at 34px 22px, #2a170f 40%, transparent 42%),
+    radial-gradient(ellipse 5px 4px at 4px 30px, #2a170f 40%, transparent 42%),
+    radial-gradient(ellipse 6px 5px at 44px 8px, #43101e 35%, transparent 38%),
+    radial-gradient(ellipse 5px 4px at 18px 34px, #43101e 35%, transparent 38%);
+  background-size: 48px 40px;
+  background-repeat: repeat;
+}
+
+/* Thin leopard-textured divider rule */
+.leopard-rule {
+  height: 3px;
+  border-radius: 999px;
+  background-color: #c9a46e;
+  background-image:
+    radial-gradient(ellipse 3px 2px at 6px 1px, #2a170f 45%, transparent 48%),
+    radial-gradient(ellipse 2px 2px at 16px 1px, #2a170f 45%, transparent 48%),
+    radial-gradient(ellipse 3px 2px at 26px 1px, #43101e 40%, transparent 44%),
+    radial-gradient(ellipse 2px 2px at 36px 1px, #2a170f 45%, transparent 48%);
+  background-size: 20px 3px;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(120deg, #e8ce9c 0%, #b8935a 45%, #e8ce9c 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.shimmer-bg {
+  background: linear-gradient(
+    100deg,
+    rgba(184, 147, 90, 0.15) 20%,
+    rgba(232, 206, 156, 0.45) 40%,
+    rgba(184, 147, 90, 0.15) 60%
+  );
+  background-size: 200% 100%;
+}
+
+::selection {
+  background: #b8935a;
+  color: #210509;
+}
+
+/* Scrollbar — subtle matte styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #210509;
+}
+::-webkit-scrollbar-thumb {
+  background: #5a1626;
+  border-radius: 999px;
+}
